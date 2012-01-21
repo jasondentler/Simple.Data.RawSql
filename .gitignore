@@ -9,6 +9,11 @@ bin
 *resharper*
 *.cache
 
+# Other
+/lib/Debug
+/lib/Release
+Simple.Data.RawSql/*.nupkg
+
 # Other useful stuff
 * Thumbs.db
 *.bak
@@ -18,10 +23,3 @@ bin
 *.user
 *.DS_Store
 
-# Ncqrs in non framework solution
-/Extensions/lib/Ncqrs/*
-/Samples/MyNotes/lib/*
-/lib/Debug
-/lib/Release
-release
-*.pidb

@@ -3,7 +3,7 @@
 
 Query a single row:
 
-	Database db = Database.Open(); // Notice statically typed the db variable as Database
+	Database db = Database.Open(); // Notice statically typed db variable as Database
 	var sql = @"SELECT TOP 1 * FROM tblData WHERE Name = @name ORDER BY Id";
 	var row = db.ToRows(sql, new {name = "Jason Dentler"});
 	// rows is a dynamic
@@ -13,7 +13,7 @@ Query a single row:
 
 Query several rows:
 
-	Database db = Database.Open(); // Notice statically typed the db variable as Database
+	Database db = Database.Open(); // Notice statically typed db variable as Database
 	var sql = @"SELECT * FROM tblData WHERE Name = @name";
 	var rows = db.ToRows(sql, new {name = "Jason Dentler"});
 	
@@ -26,7 +26,7 @@ Query several rows:
 
 Batch several queries together:
 
-	Database db = Database.Open(); // Notice statically typed the db variable as Database
+	Database db = Database.Open(); // Notice statically typed db variable as Database
 	var sql = @"
 		SELECT TOP 5 * FROM tblData WHERE Name = @name ORDER BY Name;
 		SELECT COUNT(*) AS [Count] FROM tblData WHERE Name = @name";
