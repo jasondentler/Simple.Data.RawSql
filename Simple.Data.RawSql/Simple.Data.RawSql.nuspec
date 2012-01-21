@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://raw.github.com/jasondentler/Simple.Data.RawSql/master/license.txt</licenseUrl>
+    <projectUrl>https://github.com/jasondentler/Simple.Data.RawSql</projectUrl>
+    <iconUrl>http://simplefx.org/images/simpledata100x100.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$ This is not an official Simple.Data package. (yet)</description>
+    <releaseNotes>See project website for recent commits.</releaseNotes>
+    <copyright>Copyright Jason Dentler 2012</copyright>
+    <tags>Simple.Data</tags>
+  </metadata>
+</package>
