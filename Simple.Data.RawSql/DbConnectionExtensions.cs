@@ -86,6 +86,56 @@ namespace Simple.Data.RawSql
             return connection.ToRow(sql, parameters.ObjectToDictionary());
         }
 
+        public static object ToScalar(this IDbConnection connection, string sql, IDictionary<string, object> parameters)
+        {
+            if (connection == null) throw new ArgumentNullException("connection");
+            if (sql == null) throw new ArgumentNullException("sql");
+            if (string.IsNullOrWhiteSpace(sql))
+                throw new ArgumentException(SqlEmptyOrWhitespace, "sql");
+
+            parameters = parameters ?? new Dictionary<string, object>();
+            var cmd = new DbCommandBuilder().BuildCommand(connection, sql, parameters);
+            return connection.WithOpenConnection(() => cmd.ToScalar());
+        }
+
+        public static object ToScalar(this IDbConnection connection, string sql,
+                                    params KeyValuePair<string, object>[] parameters)
+        {
+            parameters = parameters ?? new KeyValuePair<string, object>[0];
+            return connection.ToScalar(sql, parameters.ToDictionary());
+        }
+
+        public static object ToScalar(this IDbConnection connection, string sql, object parameters)
+        {
+            parameters = parameters ?? new KeyValuePair<string, object>[0];
+            return connection.ToScalar(sql, parameters.ObjectToDictionary());
+        }
+
+        public static int Execute(this IDbConnection connection, string sql, IDictionary<string, object> parameters)
+        {
+            if (connection == null) throw new ArgumentNullException("connection");
+            if (sql == null) throw new ArgumentNullException("sql");
+            if (string.IsNullOrWhiteSpace(sql))
+                throw new ArgumentException(SqlEmptyOrWhitespace, "sql");
+
+            parameters = parameters ?? new Dictionary<string, object>();
+            var cmd = new DbCommandBuilder().BuildCommand(connection, sql, parameters);
+            return connection.WithOpenConnection(cmd.ExecuteNonQuery);
+        }
+
+        public static int Execute(this IDbConnection connection, string sql,
+                                    params KeyValuePair<string, object>[] parameters)
+        {
+            parameters = parameters ?? new KeyValuePair<string, object>[0];
+            return connection.Execute(sql, parameters.ToDictionary());
+        }
+
+        public static int Execute(this IDbConnection connection, string sql, object parameters)
+        {
+            parameters = parameters ?? new KeyValuePair<string, object>[0];
+            return connection.Execute(sql, parameters.ObjectToDictionary());
+        }
+
         private static T WithOpenConnection<T>(this IDbConnection connection, Func<T> func)
         {
             if (connection.State != ConnectionState.Closed)

@@ -63,6 +63,38 @@ namespace Simple.Data.RawSql
             return db.ToRow(sql, parameters.ObjectToDictionary());
         }
 
+        public static object ToScalar(this Database db, string sql, IDictionary<string, object> parameters)
+        {
+            return db.GetAdoAdapter().ToScalar(sql, parameters);
+        }
+
+        public static object ToScalar(this Database db, string sql,
+            params KeyValuePair<string, object>[] parameters)
+        {
+            return db.GetAdoAdapter().ToScalar(sql, parameters.ToDictionary());
+        }
+
+        public static object ToScalar(this Database db, string sql, object parameters)
+        {
+            return db.GetAdoAdapter().ToScalar(sql, parameters.ObjectToDictionary());
+        }
+
+        public static int Execute(this Database db, string sql, IDictionary<string, object> parameters)
+        {
+            return db.GetAdoAdapter().ExecuteNonQuery(sql, parameters);
+        }
+
+        public static int Execute(this Database db, string sql,
+            params KeyValuePair<string, object>[] parameters)
+        {
+            return db.GetAdoAdapter().ExecuteNonQuery(sql, parameters.ToDictionary());
+        }
+
+        public static int Execute(this Database db, string sql, object parameters)
+        {
+            return db.GetAdoAdapter().ExecuteNonQuery(sql, parameters.ObjectToDictionary());
+        }
+
         private static AdoAdapter GetAdoAdapter(this Database db)
         {
             var adapter = db.GetAdapter();

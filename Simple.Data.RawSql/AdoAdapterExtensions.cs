@@ -21,12 +21,13 @@ namespace Simple.Data.RawSql
         }
 
         public static IEnumerable<IEnumerable<dynamic>> ToResultSets(this AdoAdapter adapter, string sql,
-                                                             params KeyValuePair<string, object>[] parameters)
+                                                                     params KeyValuePair<string, object>[] parameters)
         {
             return adapter.ToResultSets(sql, parameters.ToDictionary());
         }
 
-        public static IEnumerable<IEnumerable<dynamic>> ToResultSets(this AdoAdapter adapter, string sql, object parameters)
+        public static IEnumerable<IEnumerable<dynamic>> ToResultSets(this AdoAdapter adapter, string sql,
+                                                                     object parameters)
         {
             return adapter.ToResultSets(sql, parameters.ObjectToDictionary());
         }
@@ -62,6 +63,38 @@ namespace Simple.Data.RawSql
         public static dynamic ToRow(this AdoAdapter adapter, string sql, object parameters)
         {
             return adapter.ToRow(sql, parameters.ObjectToDictionary());
+        }
+
+        public static object ToScalar(this AdoAdapter adapter, string sql, IDictionary<string, object> parameters)
+        {
+            return adapter.GetConnection().ToScalar(sql, parameters);
+        }
+
+        public static object ToScalar(this AdoAdapter adapter, string sql, 
+            params KeyValuePair<string, object>[] parameters)
+        {
+            return adapter.ToScalar(sql, parameters.ToDictionary());
+        }
+        
+        public static object ToScalar(this AdoAdapter adapter, string sql, object parameters)
+        {
+            return adapter.ToScalar(sql, parameters.ObjectToDictionary());
+        }
+
+        public static int ExecuteNonQuery(this AdoAdapter adapter, string sql, IDictionary<string, object> parameters)
+        {
+            return adapter.GetConnection().Execute(sql, parameters);
+        }
+
+        public static int ExecuteNonQuery(this AdoAdapter adapter, string sql,
+            params KeyValuePair<string, object>[] parameters)
+        {
+            return adapter.ExecuteNonQuery(sql, parameters.ToDictionary());
+        }
+
+        public static int ExecuteNonQuery(this AdoAdapter adapter, string sql, object parameters)
+        {
+            return adapter.ExecuteNonQuery(sql, parameters.ObjectToDictionary());
         }
 
         private static IDbConnection GetConnection(this AdoAdapter adapter)

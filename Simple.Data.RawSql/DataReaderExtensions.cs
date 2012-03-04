@@ -27,6 +27,16 @@ namespace Simple.Data.RawSql
             return record.ToDictionary().ToRow();
         }
 
+        public static object ToScalar(this IDataReader reader)
+        {
+            return reader.Read() ? ((IDataRecord) reader).ToScalar() : null;
+        }
+
+        public static object ToScalar(this IDataRecord record)
+        {
+            return record.ToDictionary().Single().Value;
+        }
+
         private static IEnumerable<IEnumerable<SimpleRecord>> ToResultSets(this IEnumerable<IEnumerable<IDictionary<string, object>>> data)
         {
             return data.Select(ToRows).ToArray().AsEnumerable();
