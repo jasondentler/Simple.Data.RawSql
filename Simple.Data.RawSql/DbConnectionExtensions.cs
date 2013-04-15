@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using Simple.Data.Extensions;
 
 namespace Simple.Data.RawSql
 {
-    public static class DbConnectionExtensions
+    internal static class DbConnectionExtensions
     {
-
         private const string SqlEmptyOrWhitespace = "Sql statement can't be empty or whitespace.";
 
         public static IEnumerable<IEnumerable<dynamic>> ToResultSets(this IDbConnection connection, string sql,
