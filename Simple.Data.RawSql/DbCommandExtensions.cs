@@ -6,7 +6,7 @@ using Simple.Data.Extensions;
 
 namespace Simple.Data.RawSql
 {
-    public static class DbCommandExtensions
+    internal static class DbCommandExtensions
     {
         public static IEnumerable<IEnumerable<dynamic>> ToResultSets(this IDbCommand command)
         {

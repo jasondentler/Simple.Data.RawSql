@@ -5,9 +5,8 @@ using Simple.Data.Extensions;
 
 namespace Simple.Data.RawSql
 {
-    public class DbCommandBuilder
+    internal class DbCommandBuilder
     {
-
         public IDbCommand BuildCommand(IDbConnection connection, string sql, object parameters)
         {
             return BuildCommand(connection, sql, parameters.ObjectToDictionary());
