@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Dynamic;
 using Simple.Data.Ado;
 using Simple.Data.Extensions;
 
@@ -9,7 +7,6 @@ namespace Simple.Data.RawSql
 {
     public static class DatabaseExtensions
     {
-
         public static IEnumerable<IEnumerable<dynamic>> ToResultSets(
             this Database db,
             string sql,
@@ -33,7 +30,7 @@ namespace Simple.Data.RawSql
         public static IEnumerable<dynamic> ToRows(this Database db, string sql,
                                                   IDictionary<string, object> parameters)
         {
-            return db.GetAdoAdapter().ToRows(sql, parameters);
+            return new SimpleList(db.GetAdoAdapter().ToRows(sql, parameters));
         }
 
         public static IEnumerable<dynamic> ToRows(this Database db, string sql,
@@ -103,6 +100,5 @@ namespace Simple.Data.RawSql
                 throw new NotSupportedException("Only Simple.Data.Ado adapters are supported by Simple.Data.RawSql");
             return adoAdapter;
         }
-
     }
 }

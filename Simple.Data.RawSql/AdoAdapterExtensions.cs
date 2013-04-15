@@ -6,9 +6,8 @@ using Simple.Data.Extensions;
 
 namespace Simple.Data.RawSql
 {
-    public static class AdoAdapterExtensions
+    internal static class AdoAdapterExtensions
     {
-
         public static IEnumerable<IEnumerable<dynamic>> ToResultSets(
             this AdoAdapter adapter,
             string sql,
