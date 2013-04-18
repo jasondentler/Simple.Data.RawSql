@@ -37,14 +37,14 @@ namespace Simple.Data.RawSql
             return record.ToDictionary().Single().Value;
         }
 
-        private static IEnumerable<IEnumerable<SimpleRecord>> ToResultSets(this IEnumerable<IEnumerable<IDictionary<string, object>>> data)
+        private static IEnumerable<IEnumerable<dynamic>> ToResultSets(this IEnumerable<IEnumerable<IDictionary<string, object>>> data)
         {
             return data.Select(ToRows).ToArray().AsEnumerable();
         }
 
-        private static IEnumerable<SimpleRecord> ToRows(this IEnumerable<IDictionary<string, object>> rsData)
+        private static IEnumerable<dynamic> ToRows(this IEnumerable<IDictionary<string, object>> rsData)
         {
-            return rsData.Select(ToRow).ToArray().AsEnumerable();
+            return new SimpleList(rsData.Select(ToRow).ToArray().AsEnumerable());
         }
 
         private static SimpleRecord ToRow(this IDictionary<string, object> rowData)
