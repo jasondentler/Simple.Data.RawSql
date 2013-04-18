@@ -60,6 +60,5 @@ namespace Simple.Data.RawSql
         {
             parametersData.ToList().ForEach(command.AddParameter);
         }
-
     }
 }

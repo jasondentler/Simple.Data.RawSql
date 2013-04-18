@@ -8,7 +8,6 @@ namespace Simple.Data.RawSql
 {
     public static class AdoAdapterExtensions
     {
-
         public static IEnumerable<IEnumerable<dynamic>> ToResultSets(
             this AdoAdapter adapter,
             string sql,
@@ -101,6 +100,5 @@ namespace Simple.Data.RawSql
         {
             return adapter.CreateConnection();
         }
-
     }
 }
