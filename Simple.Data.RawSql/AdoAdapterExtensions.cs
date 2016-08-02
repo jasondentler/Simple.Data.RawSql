@@ -16,7 +16,7 @@ namespace Simple.Data.RawSql
             if (!adapter.ConnectionProvider.SupportsCompoundStatements)
                 throw new NotSupportedException(string.Format("{0} does not support compound statements",
                                                               adapter.GetType()));
-            return adapter.GetConnection().ToResultSets(sql, parameters);
+            return adapter.GetConnection().ToResultSets(sql, parameters, adapter.AdoOptions);
         }
 
         public static IEnumerable<IEnumerable<dynamic>> ToResultSets(this AdoAdapter adapter, string sql,
@@ -34,7 +34,7 @@ namespace Simple.Data.RawSql
         public static IEnumerable<dynamic> ToRows(this AdoAdapter adapter, string sql,
                                                   IDictionary<string, object> parameters)
         {
-            return adapter.GetConnection().ToRows(sql, parameters);
+            return adapter.GetConnection().ToRows(sql, parameters, adapter.AdoOptions);
         }
 
         public static IEnumerable<dynamic> ToRows(this AdoAdapter adapter, string sql,
@@ -50,7 +50,7 @@ namespace Simple.Data.RawSql
 
         public static dynamic ToRow(this AdoAdapter adapter, string sql, IDictionary<string, object> parameters)
         {
-            return adapter.GetConnection().ToRow(sql, parameters);
+            return adapter.GetConnection().ToRow(sql, parameters, adapter.AdoOptions);
         }
 
         public static dynamic ToRow(this AdoAdapter adapter, string sql,
@@ -66,7 +66,7 @@ namespace Simple.Data.RawSql
 
         public static object ToScalar(this AdoAdapter adapter, string sql, IDictionary<string, object> parameters)
         {
-            return adapter.GetConnection().ToScalar(sql, parameters);
+            return adapter.GetConnection().ToScalar(sql, parameters, adapter.AdoOptions);
         }
 
         public static object ToScalar(this AdoAdapter adapter, string sql, 
@@ -82,7 +82,7 @@ namespace Simple.Data.RawSql
 
         public static int ExecuteNonQuery(this AdoAdapter adapter, string sql, IDictionary<string, object> parameters)
         {
-            return adapter.GetConnection().Execute(sql, parameters);
+            return adapter.GetConnection().Execute(sql, parameters, adapter.AdoOptions);
         }
 
         public static int ExecuteNonQuery(this AdoAdapter adapter, string sql,
