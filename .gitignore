@@ -13,6 +13,8 @@ bin
 /lib/Debug
 /lib/Release
 Simple.Data.RawSql/*.nupkg
+.nuget
+packages
 
 # Other useful stuff
 * Thumbs.db

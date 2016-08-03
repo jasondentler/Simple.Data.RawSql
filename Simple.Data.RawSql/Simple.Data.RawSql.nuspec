@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>$id$</id>
+    <id>Simple.Data.RawSql.WithOptions</id>
     <version>$version$</version>
-    <title>$title$</title>
+    <!--<title>$title$</title>-->
     <authors>$author$</authors>
     <owners>$author$</owners>
     <licenseUrl>https://raw.github.com/jasondentler/Simple.Data.RawSql/master/license.txt</licenseUrl>
