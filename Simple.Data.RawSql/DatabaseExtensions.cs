@@ -5,7 +5,7 @@ using Simple.Data.Extensions;
 
 namespace Simple.Data.RawSql
 {
-    public static class DatabaseExtensions
+    public static partial class DatabaseExtensions
     {
         public static IEnumerable<IEnumerable<dynamic>> ToResultSets(
             this Database db,
@@ -99,6 +99,30 @@ namespace Simple.Data.RawSql
             if (adoAdapter == null)
                 throw new NotSupportedException("Only Simple.Data.Ado adapters are supported by Simple.Data.RawSql");
             return adoAdapter;
+        }
+    }
+
+    partial class DatabaseExtensions
+    {
+        public static List<T> ToList<T>(this Database db, string sql, params KeyValuePair<string, object>[] parameters)
+        {
+            return ToList<T>(db.ToRows(sql, parameters));
+        }
+
+        public static List<T> ToList<T>(this Database db, string sql, IDictionary<string, object> parameters)
+        {
+            return ToList<T>(db.ToRows(sql, parameters));
+        }
+
+        public static List<T> ToList<T>(this Database db, string sql, object parameters)
+        {
+            return ToList<T>(db.ToRows(sql, parameters));
+        }
+
+        private static List<T> ToList<T>(dynamic result)
+        {
+            IEnumerable<T> source = SimpleResultSet.Create(result).Cast<T>();
+            return System.Linq.Enumerable.ToList(source);
         }
     }
 }
