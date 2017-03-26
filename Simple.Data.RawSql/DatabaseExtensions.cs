@@ -104,22 +104,22 @@ namespace Simple.Data.RawSql
 
     partial class DatabaseExtensions
     {
-        public static IEnumerable<T> ToList<T>(this Database db, string sql, params KeyValuePair<string, object>[] parameters)
+        public static List<T> ToList<T>(this Database db, string sql, params KeyValuePair<string, object>[] parameters)
         {
             return ToList<T>(db.ToRows(sql, parameters));
         }
 
-        public static IEnumerable<T> ToList<T>(this Database db, string sql, IDictionary<string, object> parameters)
+        public static List<T> ToList<T>(this Database db, string sql, IDictionary<string, object> parameters)
         {
             return ToList<T>(db.ToRows(sql, parameters));
         }
 
-        public static IEnumerable<T> ToList<T>(this Database db, string sql, object parameters)
+        public static List<T> ToList<T>(this Database db, string sql, object parameters)
         {
             return ToList<T>(db.ToRows(sql, parameters));
         }
 
-        private static IEnumerable<T> ToList<T>(dynamic result)
+        private static List<T> ToList<T>(dynamic result)
         {
             IEnumerable<T> source = SimpleResultSet.Create(result).Cast<T>();
             return System.Linq.Enumerable.ToList(source);
